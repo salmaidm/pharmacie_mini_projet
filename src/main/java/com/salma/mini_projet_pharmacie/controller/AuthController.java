@@ -1,9 +1,13 @@
 package com.salma.mini_projet_pharmacie.controller;
 
-import com.salma.mini_projet_pharmacie.model.User;
+import com.salma.mini_projet_pharmacie.dto.LoginRequestDTO;
+import com.salma.mini_projet_pharmacie.dto.UserResponseDTO;
 import com.salma.mini_projet_pharmacie.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -12,13 +16,8 @@ public class AuthController {
 
     private final AuthService authService;
 
-    /**
-     * LOGIN
-     * POST /auth/login?email=...&password=...
-     */
     @PostMapping("/login")
-    public User login(@RequestParam String email,
-                      @RequestParam String password) {
-        return authService.login(email, password);
+    public UserResponseDTO login(@RequestBody LoginRequestDTO request) {
+        return authService.login(request);
     }
 }

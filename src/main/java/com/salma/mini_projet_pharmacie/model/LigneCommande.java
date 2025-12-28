@@ -7,11 +7,11 @@ public class LigneCommande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     private int quantite;
     private int QuantiteDemande;
-
+private int quantiteDemande; 
     @ManyToOne
     @JoinColumn(name = "commande_id")
     private Commande commande;
@@ -22,7 +22,7 @@ public class LigneCommande {
 
     // ===== GETTERS & SETTERS =====
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -30,7 +30,7 @@ public class LigneCommande {
         return quantite;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,5 +55,11 @@ public class LigneCommande {
     }
 
     public void setQuantiteDemande(int quantiteDemande) {
+    }
+
+
+
+    public int getQuantiteDemande() {
+        return quantiteDemande;
     }
 }

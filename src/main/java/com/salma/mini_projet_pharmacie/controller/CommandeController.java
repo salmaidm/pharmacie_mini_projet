@@ -1,5 +1,7 @@
 package com.salma.mini_projet_pharmacie.controller;
 
+import com.salma.mini_projet_pharmacie.dto.CommandeDTO;
+import com.salma.mini_projet_pharmacie.mapper.CommandeMapper;
 import com.salma.mini_projet_pharmacie.model.Commande;
 import com.salma.mini_projet_pharmacie.service.CommandeService;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +17,14 @@ public class CommandeController {
     }
 
     @PostMapping
-    public Commande creerCommande(@RequestBody Commande commande) {
-        return commandeService.creerCommande(commande);
+    public CommandeDTO creerCommande(@RequestBody CommandeDTO dto) {
+        Commande commande = commandeService.creerCommande(dto);
+        return CommandeMapper.toDTO(commande);
     }
 
     @PutMapping("/{id}/statut")
-    public Commande modifierStatut(@PathVariable Long id,
-                                   @RequestParam String statut) {
+    public Commande changerStatut(@PathVariable Integer id,
+                                  @RequestParam String statut) {
         return commandeService.changerStatut(id, statut);
     }
-
 }

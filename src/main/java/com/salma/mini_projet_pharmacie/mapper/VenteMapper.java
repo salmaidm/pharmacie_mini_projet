@@ -1,7 +1,7 @@
-package com.pharmacie.mapper;
+package com.salma.mini_projet_pharmacie.mapper;
 
-import com.pharmacie.dto.VenteDTO;
-import com.pharmacie.model.*;
+import com.salma.mini_projet_pharmacie.dto.VenteDTO;
+import com.salma.mini_projet_pharmacie.model.*;
 
 public class VenteMapper {
 
@@ -11,7 +11,7 @@ public class VenteMapper {
         v.setQuantite(dto.getQuantite());
 
         Client c = new Client();
-        c.setIdUser(dto.getClientId());
+        c.setId(dto.getClientId());
         v.setClient(c);
 
         Produit p = new Produit();
@@ -31,7 +31,7 @@ public class VenteMapper {
         dto.setIdVente(v.getIdVente());
         dto.setQuantite(v.getQuantite());
         dto.setDateVente(v.getDateVente());
-        dto.setClientId(v.getClient().getIdUser());
+        dto.setClientId(v.getClient().getId());
         dto.setProduitId(v.getProduit().getIdProduit());
         dto.setPrixTotal(v.calculerPrixTotal());
 

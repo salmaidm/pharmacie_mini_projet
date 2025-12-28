@@ -1,10 +1,10 @@
-package com.pharmacie.service;
+package com.salma.mini_projet_pharmacie.service;
 
-import com.pharmacie.dto.VenteDTO;
-import com.pharmacie.mapper.VenteMapper;
-import com.pharmacie.model.*;
-import com.pharmacie.repository.ProduitRepository;
-import com.pharmacie.repository.VenteRepository;
+import com.salma.mini_projet_pharmacie.dto.VenteDTO;
+import com.salma.mini_projet_pharmacie.mapper.VenteMapper;
+import com.salma.mini_projet_pharmacie.model.*;
+import com.salma.mini_projet_pharmacie.repository.ProduitRepository;
+import com.salma.mini_projet_pharmacie.repository.VenteRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,9 +45,9 @@ public class VenteService {
         return VenteMapper.toDTO(venteRepository.save(vente));
     }
 
-    public List<VenteDTO> ventesParClient(Long clientId) {
+    public List<VenteDTO> ventesParClient(Integer clientId) {
         Client c = new Client();
-        c.setIdUser(clientId);
+        c.setId(clientId);
 
         return venteRepository.findByClient(c)
                 .stream()

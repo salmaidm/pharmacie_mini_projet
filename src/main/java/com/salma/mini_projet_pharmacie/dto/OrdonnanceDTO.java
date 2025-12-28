@@ -1,17 +1,17 @@
-package com.pharmacie.dto;
+package com.salma.mini_projet_pharmacie.dto;
 
 import java.time.LocalDate;
 
 public class OrdonnanceDTO {
 
-    private Long idOrdonnance;
+    private Integer idOrdonnance;
     private LocalDate dateEmission;
     private String nomMedecin;
     private String description;
-    private Long clientId;
+    private Integer clientId;
 
-    public Long getIdOrdonnance() { return idOrdonnance; }
-    public void setIdOrdonnance(Long idOrdonnance) { this.idOrdonnance = idOrdonnance; }
+    public Integer getIdOrdonnance() { return idOrdonnance; }
+    public void setIdOrdonnance(Integer idOrdonnance) { this.idOrdonnance = idOrdonnance; }
 
     public LocalDate getDateEmission() { return dateEmission; }
     public void setDateEmission(LocalDate dateEmission) { this.dateEmission = dateEmission; }
@@ -22,6 +22,6 @@ public class OrdonnanceDTO {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public Long getClientId() { return clientId; }
-    public void setClientId(Long clientId) { this.clientId = clientId; }
+    public Integer getClientId() { return clientId; }
+    public void setClientId(Integer clientId) { this.clientId = clientId; }
 }

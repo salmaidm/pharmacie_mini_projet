@@ -1,7 +1,7 @@
-package com.pharmacie.controller;
+package com.salma.mini_projet_pharmacie.controller;
 
-import com.pharmacie.model.Ordonnance;
-import com.pharmacie.service.OrdonnanceService;
+import com.salma.mini_projet_pharmacie.model.Ordonnance;
+import com.salma.mini_projet_pharmacie.service.OrdonnanceService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

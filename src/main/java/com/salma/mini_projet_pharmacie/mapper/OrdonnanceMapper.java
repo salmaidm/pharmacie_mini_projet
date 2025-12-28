@@ -1,8 +1,8 @@
-package com.pharmacie.mapper;
+package com.salma.mini_projet_pharmacie.mapper;
 
-import com.pharmacie.dto.OrdonnanceDTO;
-import com.pharmacie.model.Client;
-import com.pharmacie.model.Ordonnance;
+import com.salma.mini_projet_pharmacie.dto.OrdonnanceDTO;
+import com.salma.mini_projet_pharmacie.model.Client;
+import com.salma.mini_projet_pharmacie.model.Ordonnance;
 
 public class OrdonnanceMapper {
 
@@ -14,7 +14,7 @@ public class OrdonnanceMapper {
         o.setDescription(dto.getDescription());
 
         Client c = new Client();
-        c.setIdUser(dto.getClientId());
+        c.setId(dto.getClientId());
         o.setClient(c);
 
         return o;
@@ -26,7 +26,7 @@ public class OrdonnanceMapper {
         dto.setDateEmission(o.getDateEmission());
         dto.setNomMedecin(o.getNomMedecin());
         dto.setDescription(o.getDescription());
-        dto.setClientId(o.getClient().getIdUser());
+        dto.setClientId(o.getClient().getId());
         return dto;
     }
 }

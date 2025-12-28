@@ -1,21 +1,16 @@
 package com.salma.mini_projet_pharmacie.model;
 
 import jakarta.persistence.*;
-import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "`user`") // IMPORTANT : user est un mot réservé
+@Table(name = "`user`") // user est un mot réservé en SQL
 public abstract class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUser")
-    private Long id;
+    private Integer id;
 
     @Column(name = "nomUser")
     private String nom;
@@ -32,4 +27,60 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+    // ===== Constructeur sans arguments (obligatoire pour JPA) =====
+    public User() {
+    }
+
+    // ===== Getters =====
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    // ===== Setters =====
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

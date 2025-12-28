@@ -1,7 +1,7 @@
-package com.pharmacie.service;
+package com.salma.mini_projet_pharmacie.service;
 
-import com.pharmacie.model.Ordonnance;
-import com.pharmacie.repository.OrdonnanceRepository;
+import com.salma.mini_projet_pharmacie.model.Ordonnance;
+import com.salma.mini_projet_pharmacie.repository.OrdonnanceRepository;
 import org.springframework.stereotype.Service;
 
 @Service

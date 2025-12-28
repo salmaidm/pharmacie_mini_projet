@@ -1,7 +1,7 @@
-package com.pharmacie.controller;
+package com.salma.mini_projet_pharmacie.controller;
 
-import com.pharmacie.dto.VenteDTO;
-import com.pharmacie.service.VenteService;
+import com.salma.mini_projet_pharmacie.dto.VenteDTO;
+import com.salma.mini_projet_pharmacie.service.VenteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class VenteController {
     }
 
     @GetMapping("/client/{id}")
-    public List<VenteDTO> ventesClient(@PathVariable Long id) {
+    public List<VenteDTO> ventesClient(@PathVariable Integer id) {
         return venteService.ventesParClient(id);
     }
 }

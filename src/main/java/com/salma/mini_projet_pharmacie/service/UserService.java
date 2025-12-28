@@ -25,7 +25,7 @@ public class UserService {
     }
 
     // suppression d'un pharmacien
-    public void deletePharmacien(Long id) {
+    public void deletePharmacien(Integer id) {
         pharmacienRepository.deleteById(id);
     }
 }

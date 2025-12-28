@@ -16,5 +16,21 @@ public class FournitureKey implements Serializable {
 
     @Column(name = "idFournisseur")
     private Integer idFournisseur;
-}
+    // ------------------------- GETTERS & SETTERS -------------------------
+
+    public Integer getIdProduit() {
+        return idProduit;
+    }
+
+    public void setIdProduit(Integer idProduit) {
+        this.idProduit = idProduit;
+    }
+
+    public Integer getIdFournisseur() {
+        return idFournisseur;
+    }
+
+    public void setIdFournisseur(Integer idFournisseur) {
+        this.idFournisseur = idFournisseur;
+    }}
 

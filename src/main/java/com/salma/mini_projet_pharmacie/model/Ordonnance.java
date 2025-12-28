@@ -1,4 +1,4 @@
-package com.pharmacie.model;
+package com.salma.mini_projet_pharmacie.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ public class Ordonnance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idOrdonnance;
+    private Integer idOrdonnance;
 
     private LocalDate dateEmission;
     private String nomMedecin;
@@ -24,8 +24,8 @@ public class Ordonnance {
     private List<Vente> ventes;
 
     // GETTERS & SETTERS
-    public Long getIdOrdonnance() { return idOrdonnance; }
-    public void setIdOrdonnance(Long idOrdonnance) { this.idOrdonnance = idOrdonnance; }
+    public Integer getIdOrdonnance() { return idOrdonnance; }
+    public void setIdOrdonnance(Integer idOrdonnance) { this.idOrdonnance = idOrdonnance; }
 
     public LocalDate getDateEmission() { return dateEmission; }
     public void setDateEmission(LocalDate dateEmission) { this.dateEmission = dateEmission; }

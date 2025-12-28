@@ -50,7 +50,7 @@ public class CommandeService {
     // Changement de statut
     // + mise à jour du stock
     // =========================
-    public Commande changerStatut(Long id, String statut) {
+    public Commande changerStatut(Integer id, String statut) {
 
         Commande commande = commandeRepository.findById(id)
                 .orElseThrow(() ->

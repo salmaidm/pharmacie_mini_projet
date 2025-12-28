@@ -36,7 +36,7 @@ public class CommandeMapper {
     public static CommandeDTO toDTO(Commande commande) {
 
         CommandeDTO dto = new CommandeDTO();
-        dto.setNumCmd(commande.getNumCmd());
+        dto.setNumCmd(commande.getId());
         dto.setStatut(commande.getStatut());
 
         return dto;

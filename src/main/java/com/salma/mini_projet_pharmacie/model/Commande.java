@@ -1,6 +1,8 @@
 package com.salma.mini_projet_pharmacie.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.parameters.P;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Commande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private LocalDate dateCommande;
 
@@ -18,13 +20,20 @@ public class Commande {
     @ManyToOne
     @JoinColumn(name = "fournisseur_id")
     private Fournisseur fournisseur;
+    @ManyToOne
+    @JoinColumn(name = "pharmacien_id_user")
+    private Pharmacien pharmacien ;
 
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     private List<LigneCommande> lignes;
 
+    public Pharmacien getPharmacien() {
+        return pharmacien;
+    }
+
     // ===== GETTERS & SETTERS =====
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -36,7 +45,7 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,5 +71,8 @@ public class Commande {
 
     public void setLignes(List<LigneCommande> lignes) {
         this.lignes = lignes;
+    }
+
+    public void setPharmacien(Pharmacien pharmacien) {
     }
 }

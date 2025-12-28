@@ -10,6 +10,7 @@ public class LigneCommande {
     private Long id;
 
     private int quantite;
+    private int QuantiteDemande;
 
     @ManyToOne
     @JoinColumn(name = "commande_id")
@@ -51,5 +52,8 @@ public class LigneCommande {
 
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    public void setQuantiteDemande(int quantiteDemande) {
     }
 }

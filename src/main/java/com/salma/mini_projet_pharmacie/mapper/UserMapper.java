@@ -9,10 +9,10 @@ public class UserMapper {
 
     public UserResponseDTO toDto(User user) {
         UserResponseDTO dto = new UserResponseDTO();
-        dto.setId(user.getId());
-        dto.setNom(user.getNom());
-        dto.setEmail(user.getEmail());
-        dto.setRole(user.getRole().name());
+        dto.setId(user.getId());           // ✅ toujours getId()
+        dto.setNom(user.getNom());         // ✅ toujours getNom()
+        dto.setEmail(user.getEmail());     // ✅ toujours getEmail()
+        dto.setRole(user.getRole().name());// ✅ toujours getRole()
         return dto;
     }
 }

@@ -11,8 +11,9 @@ public class Commande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "numCmd")
+    private Integer numCmd;
+
     private LocalDate dateCommande;
 
     private String statut; // EN_ATTENTE, LIVREE, ANNULEE
@@ -27,14 +28,16 @@ public class Commande {
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL)
     private List<LigneCommande> lignes;
 
-    public Pharmacien getPharmacien() {
-        return pharmacien;
-    }
+
 
     // ===== GETTERS & SETTERS =====
 
-    public int getId() {
-        return id;
+    public Integer getNumCmd() {
+        return numCmd;
+    }
+
+    public void setNumCmd(Integer numCmd) {
+        this.numCmd = numCmd;
     }
 
     public LocalDate getDateCommande() {
@@ -45,9 +48,6 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getStatut() {
         return statut;
@@ -73,6 +73,5 @@ public class Commande {
         this.lignes = lignes;
     }
 
-    public void setPharmacien(Pharmacien pharmacien) {
-    }
+
 }

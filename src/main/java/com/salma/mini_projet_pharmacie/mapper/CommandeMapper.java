@@ -46,7 +46,7 @@ public class CommandeMapper {
     public static CommandeDTO toDTO(Commande commande) {
 
         CommandeDTO dto = new CommandeDTO();
-        dto.setIdCommande(commande.getId());
+        dto.setIdCommande(commande.getNumCmd());
         dto.setStatut(commande.getStatut());
 
         if (commande.getFournisseur() != null) {

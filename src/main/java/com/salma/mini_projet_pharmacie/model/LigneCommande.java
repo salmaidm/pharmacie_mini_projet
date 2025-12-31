@@ -11,8 +11,9 @@ public class LigneCommande {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "commande_id")
+    @JoinColumn(name = "numCmd")
     private Commande commande;
+
 
     @ManyToOne
     @JoinColumn(name = "produit_id")

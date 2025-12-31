@@ -66,9 +66,10 @@ public class CommandeService {
     // =========================
     // Changement de statut
     // =========================
-    public Commande changerStatut(Integer id, String statut) {
+    public Commande changerStatut(Integer numCmd, String statut) {
 
-        Commande commande = commandeRepository.findById(id)
+        Commande commande = commandeRepository.findById(numCmd)
+
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Commande non trouvée"));
 

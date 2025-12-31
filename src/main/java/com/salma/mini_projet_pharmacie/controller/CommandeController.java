@@ -30,10 +30,10 @@ public class CommandeController {
     // =========================
     // Changer statut
     // =========================
-    @PutMapping("/{id}/statut")
-    public CommandeDTO changerStatut(@PathVariable Integer id,
-                                     @RequestParam String statut) {
-        Commande commande = commandeService.changerStatut(id, statut);
+    @PutMapping("/{numCmd}/statut")
+    public CommandeDTO changerStatut(@PathVariable Integer numCmd,
+                                     @RequestBody CommandeDTO body) {
+        Commande commande = commandeService.changerStatut(numCmd, body.getStatut());
         return CommandeMapper.toDTO(commande);
     }
     @GetMapping

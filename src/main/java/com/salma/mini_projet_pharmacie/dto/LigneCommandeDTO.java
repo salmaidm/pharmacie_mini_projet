@@ -2,31 +2,22 @@ package com.salma.mini_projet_pharmacie.dto;
 
 public class LigneCommandeDTO {
 
-    private Integer idProduit;
-    private int quantite;
-    private int quantiteDemande;
+    private Integer produitId;
+    private Integer quantite;
 
-    public Integer getIdProduit() {
-        return idProduit;
+    public Integer getProduitId() {
+        return produitId;
     }
 
-    public void setIdProduit(Integer idProduit) {
-        this.idProduit = idProduit;
+    public void setProduitId(Integer produitId) {
+        this.produitId = produitId;
     }
 
-    public int getQuantite() {
+    public Integer getQuantite() {
         return quantite;
     }
 
-    public void setQuantite(int quantite) {
+    public void setQuantite(Integer quantite) {
         this.quantite = quantite;
-    }
-
-    public int getQuantiteDemande() {
-        return quantiteDemande;
-    }
-
-    public void setQuantiteDemande(int quantiteDemande) {
-        this.quantiteDemande = quantiteDemande;
     }
 }

@@ -4,17 +4,28 @@ import java.util.List;
 
 public class CommandeDTO {
 
-    private Integer numCmd;
+    private Integer idCommande;
+    private Integer fournisseurId;   // ✅ AJOUTÉ
     private String statut;
-    private Integer idPharmacien;
+
     private List<LigneCommandeDTO> lignes;
 
-    public Integer getNumCmd() {
-        return numCmd;
+    // ===== GETTERS & SETTERS =====
+
+    public Integer getIdCommande() {
+        return idCommande;
     }
 
-    public void setNumCmd(Integer numCmd) {
-        this.numCmd = numCmd;
+    public void setIdCommande(Integer idCommande) {
+        this.idCommande = idCommande;
+    }
+
+    public Integer getFournisseurId() {
+        return fournisseurId;
+    }
+
+    public void setFournisseurId(Integer fournisseurId) {
+        this.fournisseurId = fournisseurId;
     }
 
     public String getStatut() {
@@ -23,14 +34,6 @@ public class CommandeDTO {
 
     public void setStatut(String statut) {
         this.statut = statut;
-    }
-
-    public Integer getIdPharmacien() {
-        return idPharmacien;
-    }
-
-    public void setIdPharmacien(Integer idPharmacien) {
-        this.idPharmacien = idPharmacien;
     }
 
     public List<LigneCommandeDTO> getLignes() {

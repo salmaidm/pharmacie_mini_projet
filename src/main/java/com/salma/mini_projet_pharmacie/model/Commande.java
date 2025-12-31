@@ -11,8 +11,8 @@ public class Commande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-
     private LocalDate dateCommande;
 
     private String statut; // EN_ATTENTE, LIVREE, ANNULEE

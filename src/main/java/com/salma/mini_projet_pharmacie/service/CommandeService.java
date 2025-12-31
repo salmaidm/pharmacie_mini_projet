@@ -5,50 +5,66 @@ import com.salma.mini_projet_pharmacie.exception.ResourceNotFoundException;
 import com.salma.mini_projet_pharmacie.mapper.CommandeMapper;
 import com.salma.mini_projet_pharmacie.model.*;
 import com.salma.mini_projet_pharmacie.repository.CommandeRepository;
+import com.salma.mini_projet_pharmacie.repository.FournisseurRepository;
 import com.salma.mini_projet_pharmacie.repository.ProduitRepository;
-import com.salma.mini_projet_pharmacie.repository.PharmacienRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class CommandeService {
 
     private final CommandeRepository commandeRepository;
     private final ProduitRepository produitRepository;
-    private final PharmacienRepository pharmacienRepository;
+    private final FournisseurRepository fournisseurRepository;
 
     public CommandeService(CommandeRepository commandeRepository,
                            ProduitRepository produitRepository,
-                           PharmacienRepository pharmacienRepository) {
+                           FournisseurRepository fournisseurRepository) {
         this.commandeRepository = commandeRepository;
         this.produitRepository = produitRepository;
-        this.pharmacienRepository = pharmacienRepository;
+        this.fournisseurRepository = fournisseurRepository;
     }
 
     // =========================
-    // Création d'une commande
+    // Création commande (DTO)
     // =========================
     public Commande creerCommande(CommandeDTO dto) {
 
-        // Vérifier l'existence du pharmacien
-        Pharmacien pharmacien = pharmacienRepository.findById(dto.getIdPharmacien())
+        if (dto.getFournisseurId() == null) {
+            throw new RuntimeException("ID Fournisseur manquant");
+        }
+
+        Fournisseur fournisseur = fournisseurRepository
+                .findById(dto.getFournisseurId())
                 .orElseThrow(() ->
-                        new ResourceNotFoundException("Pharmacien introuvable"));
+                        new RuntimeException("Fournisseur introuvable"));
 
-        // Mapping DTO -> Entity
-        Commande commande = CommandeMapper.toEntity(dto, pharmacien);
+        Commande commande = CommandeMapper.toEntity(dto);
+        commande.setFournisseur(fournisseur);
 
-        // Logique métier INCHANGÉE
-        commande.setDateCommande(LocalDate.now());
-        commande.setStatut("EN_ATTENTE");
+        for (LigneCommande ligne : commande.getLignes()) {
+
+            if (ligne.getProduit() == null ||
+                    ligne.getProduit().getIdProduit() == null) {
+                throw new RuntimeException("Produit manquant");
+            }
+
+            Produit produit = produitRepository
+                    .findById(ligne.getProduit().getIdProduit())
+                    .orElseThrow(() ->
+                            new RuntimeException("Produit introuvable"));
+
+            ligne.setProduit(produit);
+            ligne.setCommande(commande);
+        }
 
         return commandeRepository.save(commande);
     }
 
+
     // =========================
     // Changement de statut
-    // + mise à jour du stock
     // =========================
     public Commande changerStatut(Integer id, String statut) {
 
@@ -58,17 +74,20 @@ public class CommandeService {
 
         commande.setStatut(statut);
 
-        // LOGIQUE IDENTIQUE à ton code initial
+        // Mise à jour stock si livrée
         if ("LIVREE".equalsIgnoreCase(statut)) {
             for (LigneCommande lc : commande.getLignes()) {
                 Produit produit = lc.getProduit();
                 produit.setQuantiteStock(
-                        produit.getQuantiteStock() + lc.getQuantite()
+                        produit.getQuantiteStock() + lc.getQuantiteDemande()
                 );
                 produitRepository.save(produit);
             }
         }
 
         return commandeRepository.save(commande);
+    }
+    public List<Commande> getAllCommandes() {
+        return commandeRepository.findAll();
     }
 }

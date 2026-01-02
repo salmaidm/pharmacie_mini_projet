@@ -7,6 +7,7 @@ import com.salma.mini_projet_pharmacie.service.CommandeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/commandes")
@@ -18,26 +19,31 @@ public class CommandeController {
         this.commandeService = commandeService;
     }
 
-    // =========================
-    // Création commande
-    // =========================
     @PostMapping
     public CommandeDTO creerCommande(@RequestBody CommandeDTO dto) {
         Commande commande = commandeService.creerCommande(dto);
         return CommandeMapper.toDTO(commande);
     }
 
-    // =========================
-    // Changer statut
-    // =========================
     @PutMapping("/{numCmd}/statut")
     public CommandeDTO changerStatut(@PathVariable Integer numCmd,
                                      @RequestBody CommandeDTO body) {
         Commande commande = commandeService.changerStatut(numCmd, body.getStatut());
         return CommandeMapper.toDTO(commande);
     }
+
     @GetMapping
-    public List<Commande> getAllCommandes() {
-        return commandeService.getAllCommandes();
+    public List<CommandeDTO> getAllCommandes() {
+        return commandeService.getAllCommandes()
+                .stream()
+                .map(CommandeMapper::toDTO)
+                .toList();
+    }
+
+
+    // (optionnel mais utile pour le front bouton supprimer)
+    @DeleteMapping("/{numCmd}")
+    public void supprimer(@PathVariable Integer numCmd) {
+        commandeService.supprimerCommande(numCmd);
     }
 }

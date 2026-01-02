@@ -3,7 +3,7 @@ package com.salma.mini_projet_pharmacie.dto;
 public class LigneCommandeDTO {
 
     private Integer produitId;
-    private Integer quantite;
+    private Integer quantiteDemande;
 
     public Integer getProduitId() {
         return produitId;
@@ -13,11 +13,11 @@ public class LigneCommandeDTO {
         this.produitId = produitId;
     }
 
-    public Integer getQuantite() {
-        return quantite;
+    public Integer getQuantiteDemande() {
+        return quantiteDemande;
     }
 
-    public void setQuantite(Integer quantite) {
-        this.quantite = quantite;
+    public void setQuantiteDemande(Integer quantiteDemande) {
+        this.quantiteDemande = quantiteDemande;
     }
 }

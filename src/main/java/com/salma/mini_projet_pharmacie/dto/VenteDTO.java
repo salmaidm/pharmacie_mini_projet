@@ -14,6 +14,11 @@ public class VenteDTO {
 
     private double prixTotal;
 
+    // ✅ Infos ordonnance (pour affichage dans liste ventes)
+    private String ordonnanceNomMedecin;
+    private LocalDate ordonnanceDateEmission;
+    private String ordonnanceDescription;
+
     public Integer getIdVente() { return idVente; }
     public void setIdVente(Integer idVente) { this.idVente = idVente; }
 
@@ -34,4 +39,13 @@ public class VenteDTO {
 
     public double getPrixTotal() { return prixTotal; }
     public void setPrixTotal(double prixTotal) { this.prixTotal = prixTotal; }
+
+    public String getOrdonnanceNomMedecin() { return ordonnanceNomMedecin; }
+    public void setOrdonnanceNomMedecin(String ordonnanceNomMedecin) { this.ordonnanceNomMedecin = ordonnanceNomMedecin; }
+
+    public LocalDate getOrdonnanceDateEmission() { return ordonnanceDateEmission; }
+    public void setOrdonnanceDateEmission(LocalDate ordonnanceDateEmission) { this.ordonnanceDateEmission = ordonnanceDateEmission; }
+
+    public String getOrdonnanceDescription() { return ordonnanceDescription; }
+    public void setOrdonnanceDescription(String ordonnanceDescription) { this.ordonnanceDescription = ordonnanceDescription; }
 }

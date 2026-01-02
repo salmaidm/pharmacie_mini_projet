@@ -91,4 +91,9 @@ public class CommandeService {
     public List<Commande> getAllCommandes() {
         return commandeRepository.findAll();
     }
+    public void supprimerCommande(Integer numCmd) {
+        Commande cmd = commandeRepository.findById(numCmd)
+                .orElseThrow(() -> new RuntimeException("Commande introuvable"));
+        commandeRepository.delete(cmd);
+    }
 }

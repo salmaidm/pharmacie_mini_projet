@@ -25,4 +25,20 @@ public class VenteController {
     public List<VenteDTO> ventesClient(@PathVariable Integer id) {
         return venteService.ventesParClient(id);
     }
+
+    // modifier vente (quantité / ordonnance)
+    @PutMapping("/{id}")
+    public VenteDTO modifier(@PathVariable Integer id, @RequestBody VenteDTO dto) {
+        return venteService.modifierVente(id, dto);
+    }
+
+    //  supprimer vente
+    @DeleteMapping("/{id}")
+    public void supprimer(@PathVariable Integer id) {
+        venteService.supprimerVente(id);
+    }
+    @GetMapping
+    public List<VenteDTO> all() {
+        return venteService.toutesLesVentes();
+    }
 }

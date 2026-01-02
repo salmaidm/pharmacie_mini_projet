@@ -22,4 +22,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("error", ex.getMessage()));
     }
+
+
+        @ExceptionHandler(StockInsuffisantException.class)
+        public ResponseEntity<Map<String, String>> handleStock(StockInsuffisantException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", ex.getMessage()));
+        }
+
+        @ExceptionHandler(RuntimeException.class)
+        public ResponseEntity<Map<String, String>> handleRuntime(RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of("message", ex.getMessage()));
+        }
 }

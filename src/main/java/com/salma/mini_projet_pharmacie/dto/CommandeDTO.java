@@ -1,16 +1,16 @@
 package com.salma.mini_projet_pharmacie.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class CommandeDTO {
 
-    private Integer idCommande;
-    private Integer fournisseurId;   // ✅ AJOUTÉ
+    private Integer idCommande;          // correspond à numCmd
+    private LocalDate dateCommande;      // ✅ ajouté
     private String statut;
+    private Integer fournisseurId;
 
     private List<LigneCommandeDTO> lignes;
-
-    // ===== GETTERS & SETTERS =====
 
     public Integer getIdCommande() {
         return idCommande;
@@ -20,12 +20,12 @@ public class CommandeDTO {
         this.idCommande = idCommande;
     }
 
-    public Integer getFournisseurId() {
-        return fournisseurId;
+    public LocalDate getDateCommande() {
+        return dateCommande;
     }
 
-    public void setFournisseurId(Integer fournisseurId) {
-        this.fournisseurId = fournisseurId;
+    public void setDateCommande(LocalDate dateCommande) {
+        this.dateCommande = dateCommande;
     }
 
     public String getStatut() {
@@ -34,6 +34,14 @@ public class CommandeDTO {
 
     public void setStatut(String statut) {
         this.statut = statut;
+    }
+
+    public Integer getFournisseurId() {
+        return fournisseurId;
+    }
+
+    public void setFournisseurId(Integer fournisseurId) {
+        this.fournisseurId = fournisseurId;
     }
 
     public List<LigneCommandeDTO> getLignes() {

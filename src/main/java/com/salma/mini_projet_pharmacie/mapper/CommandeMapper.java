@@ -3,77 +3,60 @@ package com.salma.mini_projet_pharmacie.mapper;
 import com.salma.mini_projet_pharmacie.dto.CommandeDTO;
 import com.salma.mini_projet_pharmacie.dto.LigneCommandeDTO;
 import com.salma.mini_projet_pharmacie.model.Commande;
+import com.salma.mini_projet_pharmacie.model.Fournisseur;
 import com.salma.mini_projet_pharmacie.model.LigneCommande;
-import com.salma.mini_projet_pharmacie.model.Produit;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class CommandeMapper {
 
-    // =========================
-    // DTO -> ENTITY
-    // =========================
-    public static Commande toEntity(CommandeDTO dto) {
-
-        Commande commande = new Commande();
-        commande.setStatut(dto.getStatut());
-
-        if (dto.getLignes() != null) {
-            commande.setLignes(
-                    dto.getLignes().stream().map(ligneDTO -> {
-
-                        LigneCommande ligne = new LigneCommande();
-                        ligne.setQuantiteDemande(ligneDTO.getQuantite());
-                        ligne.setCommande(commande);
-
-                        // On crée juste un Produit avec son ID
-                        Produit produit = new Produit();
-                        produit.setIdProduit(ligneDTO.getProduitId());
-                        ligne.setProduit(produit);
-
-                        return ligne;
-
-                    }).collect(Collectors.toList())
-            );
-        }
-
-        return commande;
-    }
-
-    // =========================
-    // ENTITY -> DTO
-    // =========================
-    public static CommandeDTO toDTO(Commande commande) {
+    public static CommandeDTO toDTO(Commande c) {
+        if (c == null) return null;
 
         CommandeDTO dto = new CommandeDTO();
-        dto.setIdCommande(commande.getNumCmd());
-        dto.setStatut(commande.getStatut());
+        dto.setIdCommande(c.getNumCmd());
+        dto.setDateCommande(c.getDateCommande());   // ✅
+        dto.setStatut(c.getStatut());
 
-        if (commande.getFournisseur() != null) {
-            dto.setFournisseurId(
-                    commande.getFournisseur().getIdFournisseur()
-            );
+        if (c.getFournisseur() != null) {
+            dto.setFournisseurId(c.getFournisseur().getIdFournisseur());
         }
 
-        if (commande.getLignes() != null) {
-            dto.setLignes(
-                    commande.getLignes().stream().map(ligne -> {
-
-                        LigneCommandeDTO ligneDTO = new LigneCommandeDTO();
-                        ligneDTO.setQuantite(ligne.getQuantiteDemande());
-
-                        if (ligne.getProduit() != null) {
-                            ligneDTO.setProduitId(
-                                    ligne.getProduit().getIdProduit()
-                            );
-                        }
-
-                        return ligneDTO;
-
-                    }).collect(Collectors.toList())
-            );
+        if (c.getLignes() != null) {
+            List<LigneCommandeDTO> lignes = c.getLignes().stream()
+                    .map(LigneCommandeMapper::toDTO)
+                    .collect(Collectors.toList());
+            dto.setLignes(lignes);
         }
 
         return dto;
+    }
+
+    public static Commande toEntity(CommandeDTO dto) {
+        if (dto == null) return null;
+
+        Commande c = new Commande();
+        c.setNumCmd(dto.getIdCommande());
+        c.setDateCommande(dto.getDateCommande());  // ✅ (souvent null, service peut mettre now())
+        c.setStatut(dto.getStatut());
+
+        if (dto.getFournisseurId() != null) {
+            Fournisseur f = new Fournisseur();
+            f.setIdFournisseur(dto.getFournisseurId());
+            c.setFournisseur(f);
+        }
+
+        if (dto.getLignes() != null) {
+            List<LigneCommande> lignes = dto.getLignes().stream()
+                    .map(LigneCommandeMapper::toEntity)
+                    .collect(Collectors.toList());
+
+            // ✅ important: lier les lignes à la commande
+            lignes.forEach(l -> l.setCommande(c));
+            c.setLignes(lignes);
+        }
+
+        return c;
     }
 }

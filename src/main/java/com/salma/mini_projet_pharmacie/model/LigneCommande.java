@@ -3,38 +3,38 @@ package com.salma.mini_projet_pharmacie.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "LigneCommande")
 public class LigneCommande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private int quantite;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "commande_id")
+    @JoinColumn(name = "numCmd")
     private Commande commande;
+
 
     @ManyToOne
     @JoinColumn(name = "produit_id")
     private Produit produit;
 
+    // UN SEUL CHAMP
+    @Column(name = "quantiteDemande")
+    private Integer quantiteDemande;
+
+    // (si tu veux aussi quantite LIVRÉE, change le nom)
+    // @Column(name = "quantiteLivree")
+    // private Integer quantiteLivree;
+
     // ===== GETTERS & SETTERS =====
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
     }
 
     public Commande getCommande() {
@@ -51,5 +51,13 @@ public class LigneCommande {
 
     public void setProduit(Produit produit) {
         this.produit = produit;
+    }
+
+    public Integer getQuantiteDemande() {
+        return quantiteDemande;
+    }
+
+    public void setQuantiteDemande(Integer quantiteDemande) {
+        this.quantiteDemande = quantiteDemande;
     }
 }
